@@ -41,7 +41,7 @@ public class AtomSQExtensionDefinition extends ControllerExtensionDefinition
    @Override
    public String getHardwareVendor()
    {
-      return "Presonus";
+      return "PreSonus";
    }
    
    @Override
@@ -73,9 +73,7 @@ public class AtomSQExtensionDefinition extends ControllerExtensionDefinition
    {
       if (platformType == PlatformType.WINDOWS)
       {
-         // TODO: Set the correct names of the ports for auto detection on Windows platform here
-         // and uncomment this when port names are correct.
-         // list.add(new String[]{"Input Port 0"}, new String[]{"Output Port 0"});
+         list.add(new String[]{"ATM SQ"}, new String[]{"MIDIOUT2 (ATM SQ)"});
       }
       else if (platformType == PlatformType.MAC)
       {
