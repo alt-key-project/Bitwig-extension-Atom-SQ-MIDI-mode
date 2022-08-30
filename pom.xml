@@ -7,7 +7,7 @@
 	<packaging>jar</packaging>
 	<name>Atom SQ</name>
 	<version>0.1</version>
-	
+
 	<repositories>
        <repository>
          <id>bitwig</id>
@@ -39,7 +39,7 @@
                   <maxmem>1024m</maxmem>
                </configuration>
          </plugin>
-		
+
 			<plugin>
 				<groupId>com.coderplus.maven.plugins</groupId>
 				<artifactId>copy-rename-maven-plugin</artifactId>
@@ -62,4 +62,3 @@
 	</build>
 
 </project>
-
