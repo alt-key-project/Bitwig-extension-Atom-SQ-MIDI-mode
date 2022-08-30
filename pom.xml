@@ -8,6 +8,10 @@
 	<name>Atom SQ</name>
 	<version>0.1</version>
 
+	<properties>
+		<bitwig.extension.directory>C:/Users/morga/Documents/Bitwig Studio/Extensions</bitwig.extension.directory>
+	</properties>
+
 	<repositories>
        <repository>
          <id>bitwig</id>
@@ -53,7 +57,7 @@
 						</goals>
 						<configuration>
 							<sourceFile>${project.build.directory}/${project.build.finalName}.jar</sourceFile>
-							<destinationFile>${project.build.directory}/AtomSQ.bwextension</destinationFile>
+							<destinationFile>${bitwig.extension.directory}/AtomSQ.bwextension</destinationFile>
 						</configuration>
 					</execution>
 				</executions>

@@ -64,6 +64,8 @@ public class AtomSQExtension extends ControllerExtension
    private void onMidi0(ShortMidiMessage msg) 
    {
       // TODO: Implement your MIDI input handling code here.
+
+
    }
 
    /** Called when we receive sysex MIDI message on port 0. */
