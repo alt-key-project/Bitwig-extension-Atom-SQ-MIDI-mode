@@ -17,7 +17,7 @@ public class AtomSQExtensionDefinition extends ControllerExtensionDefinition
    @Override
    public String getName()
    {
-      return "Atom SQ";
+      return "Atom SQ - Midi Mode";
    }
    
    @Override
@@ -29,7 +29,7 @@ public class AtomSQExtensionDefinition extends ControllerExtensionDefinition
    @Override
    public String getVersion()
    {
-      return "0.1";
+      return "1.0.0";
    }
 
    @Override
