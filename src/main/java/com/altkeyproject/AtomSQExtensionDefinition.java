@@ -8,7 +8,7 @@ import com.bitwig.extension.controller.api.ControllerHost;
 
 public class AtomSQExtensionDefinition extends ControllerExtensionDefinition
 {
-   private static final UUID DRIVER_ID = UUID.fromString("064b2476-088d-4fa0-a4c2-ba1092d869cd");
+   private static final UUID DRIVER_ID = UUID.fromString("064b2476-188d-4fa0-24c2-bf1192d869cd");
    
    public AtomSQExtensionDefinition()
    {
@@ -17,7 +17,7 @@ public class AtomSQExtensionDefinition extends ControllerExtensionDefinition
    @Override
    public String getName()
    {
-      return "Atom SQ - Midi Mode";
+      return "Atom SQ (MIDI mode)";
    }
    
    @Override
@@ -47,7 +47,7 @@ public class AtomSQExtensionDefinition extends ControllerExtensionDefinition
    @Override
    public String getHardwareModel()
    {
-      return "Atom SQ";
+      return "Atom SQ (MIDI mode)";
    }
 
    @Override
@@ -73,19 +73,21 @@ public class AtomSQExtensionDefinition extends ControllerExtensionDefinition
    {
       if (platformType == PlatformType.WINDOWS)
       {
-         list.add(new String[]{"ATM SQ"}, new String[]{"MIDIOUT2 (ATM SQ)"});
+         list.add(new String[]{"ATM SQ"}, new String[]{"ATM SQ"});
+         list.add(new String[]{"MIDIIN2 (ATM SQ)"}, new String[]{"MIDIOUT2 (ATM SQ)"});
+
       }
       else if (platformType == PlatformType.MAC)
       {
-         // TODO: Set the correct names of the ports for auto detection on Windows platform here
-         // and uncomment this when port names are correct.
-         // list.add(new String[]{"Input Port 0"}, new String[]{"Output Port 0"});
+         // probably wrong
+         list.add(new String[]{"ATM SQ"}, new String[]{"ATM SQ"});
+         list.add(new String[]{"MIDIIN2 (ATM SQ)"}, new String[]{"MIDIOUT2 (ATM SQ)"});
       }
       else if (platformType == PlatformType.LINUX)
       {
-         // TODO: Set the correct names of the ports for auto detection on Windows platform here
-         // and uncomment this when port names are correct.
-         // list.add(new String[]{"Input Port 0"}, new String[]{"Output Port 0"});
+         // probably wrong
+         list.add(new String[]{"ATM SQ"}, new String[]{"ATM SQ"});
+         list.add(new String[]{"MIDIIN2 (ATM SQ)"}, new String[]{"MIDIOUT2 (ATM SQ)"});
       }
    }
 

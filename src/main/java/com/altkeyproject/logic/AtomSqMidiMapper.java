@@ -1,9 +1,16 @@
 package com.altkeyproject.logic;
 
+import com.altkeyproject.AtomSQExtPrefs;
+import com.altkeyproject.prefs.ArrowModeLR;
+import com.altkeyproject.prefs.ArrowModeLRShifted;
+import com.altkeyproject.prefs.ArrowModeUD;
+import com.altkeyproject.prefs.ArrowModeUDShifted;
 import com.bitwig.extension.api.util.midi.ShortMidiMessage;
 import com.bitwig.extension.callback.ShortMidiMessageReceivedCallback;
 import com.bitwig.extension.controller.api.MidiIn;
+import com.bitwig.extension.controller.api.NoteInput;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Consumer;
@@ -13,6 +20,7 @@ public class AtomSqMidiMapper {
     private final ControlChangeActions control;
     private final Consumer<String> tracer;
     private final ConcurrentLinkedQueue<Runnable> actions = new ConcurrentLinkedQueue<>();
+    private final NoteInput noteInput;
     private ShiftableButtonHandler stopButtonHandler;
     private ShiftableButtonHandler playButtonHandler;
     private ShiftableButtonHandler recButtonHandler;
@@ -23,14 +31,45 @@ public class AtomSqMidiMapper {
     private ShiftableButtonHandler rightButtonHandler;
 
 
-    public AtomSqMidiMapper(AtomSqButtonLogic buttonLogic, MidiIn midiIn, Consumer<String> tracer) {
+    public AtomSqMidiMapper(AtomSqButtonLogic buttonLogic, MidiIn midiIn, AtomSQExtPrefs prefs, Consumer<String> tracer) {
         this.buttonLogic = buttonLogic;
         this.control = new ControlChangeActions();
         this.tracer = tracer;
+        tracer.accept("Setup MIDI mapper.");
         midiIn.setMidiCallback((ShortMidiMessageReceivedCallback) msg -> onMidi0(msg));
         midiIn.setSysexCallback((String data) -> onSysex0(data));
-        midiIn.createNoteInput("Atom SQ", "8?????", "9?????", "D?????", "E0????", "B00???", "B01???", "B040??");
+
+        String[] noteInputMasks = getNoteInputMasks(prefs);
+        noteInput = midiIn.createNoteInput("Atom SQ", noteInputMasks);
         initMappings();
+    }
+
+    public String[] getNoteInputMasks(AtomSQExtPrefs prefs) {
+        ArrayList<String> patterns = new ArrayList<>();
+        patterns.add("8?????");
+        patterns.add("9?????");
+        patterns.add("D?????");
+        patterns.add("E0????");
+        patterns.add("B00???");
+        patterns.add("B01???");
+        patterns.add("B040??");
+        if (prefs.getArrowModeUD() == ArrowModeUD.MIDI_CC) {
+            patterns.add("B067??");
+            patterns.add("B068??");
+        }
+        if (prefs.getArrowModeUDShifted() == ArrowModeUDShifted.MIDI_CC) {
+            patterns.add("B167??");
+            patterns.add("B168??");
+        }
+        if (prefs.getArrowModeLR() == ArrowModeLR.MIDI_CC) {
+            patterns.add("B066??");
+            patterns.add("B069??");
+        }
+        if (prefs.getArrowModeLRShifted() == ArrowModeLRShifted.MIDI_CC) {
+            patterns.add("B166??");
+            patterns.add("B169??");
+        }
+        return patterns.toArray(new String[0]);
     }
 
     public void flush() {

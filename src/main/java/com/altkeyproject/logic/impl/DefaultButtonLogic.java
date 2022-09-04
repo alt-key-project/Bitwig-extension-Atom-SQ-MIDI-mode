@@ -1,18 +1,29 @@
 package com.altkeyproject.logic.impl;
 
+import com.altkeyproject.AtomSQExtPrefs;
 import com.altkeyproject.logic.AtomSqButtonLogic;
 import com.altkeyproject.logic.ButtonState;
-import com.bitwig.extension.controller.api.Application;
-import com.bitwig.extension.controller.api.ControllerHost;
-import com.bitwig.extension.controller.api.Transport;
+import com.bitwig.extension.controller.api.*;
 
 public class DefaultButtonLogic implements AtomSqButtonLogic {
     private final Transport transport;
     private final Application application;
+    private final Mixer mixer;
+    private final AtomSQExtPrefs prefs;
+    private final ControllerHost host;
 
-    public DefaultButtonLogic(ControllerHost host) {
+    public DefaultButtonLogic(ControllerHost host, AtomSQExtPrefs prefs) {
+        this.host = host;
         transport = host.createTransport();
         application = host.createApplication();
+        mixer = host.createMixer();
+        this.prefs = prefs;
+        registerInterest();
+    }
+
+    private void registerInterest() {
+        transport.preRoll().markInterested();
+        transport.isMetronomeAudibleDuringPreRoll().markInterested();
     }
 
     @Override
@@ -20,7 +31,7 @@ public class DefaultButtonLogic implements AtomSqButtonLogic {
         if (state == ButtonState.PRESSED) {
             transport.stop();
         } else if (state == ButtonState.SHIFT_PRESSED) {
-
+            application.undo();
         }
     }
 
@@ -29,7 +40,7 @@ public class DefaultButtonLogic implements AtomSqButtonLogic {
         if (state == ButtonState.PRESSED) {
             transport.play();
         } else if (state == ButtonState.SHIFT_PRESSED) {
-
+            //loop
         }
     }
 
@@ -38,7 +49,7 @@ public class DefaultButtonLogic implements AtomSqButtonLogic {
         if (state == ButtonState.PRESSED) {
             transport.record();
         } else if (state == ButtonState.SHIFT_PRESSED) {
-
+            //save
         }
     }
 
@@ -47,43 +58,105 @@ public class DefaultButtonLogic implements AtomSqButtonLogic {
         if (state == ButtonState.PRESSED) {
             transport.isMetronomeEnabled().toggle();
         } else if (state == ButtonState.SHIFT_PRESSED) {
-
+            transport.isMetronomeAudibleDuringPreRoll().toggle();
+            if (transport.preRoll().get().equalsIgnoreCase("none") && transport.isMetronomeAudibleDuringPreRoll().get()) {
+                transport.preRoll().set("one_bar");
+            }
         }
     }
+
 
     @Override
     public void upArrowButton(ButtonState state) {
         if (state == ButtonState.PRESSED) {
-            application.arrowKeyUp();
-        } else if (state == ButtonState.SHIFT_PRESSED) {
+            switch (prefs.getArrowModeUD()) {
+                case ARROW_KEYS:
+                    application.arrowKeyUp();
+                    break;
 
+            }
+        } else if (state == ButtonState.SHIFT_PRESSED) {
+            switch (prefs.getArrowModeUDShifted()) {
+                case ARROW_KEYS:
+                    application.arrowKeyUp();
+                    break;
+                case SELECT_FIRST_LAST_ITEM:
+                    application.selectFirst();
+                    break;
+
+            }
         }
     }
 
     @Override
     public void downArrowButton(ButtonState state) {
         if (state == ButtonState.PRESSED) {
-            application.arrowKeyDown();
+            switch (prefs.getArrowModeUD()) {
+                case ARROW_KEYS:
+                    application.arrowKeyDown();
+                    break;
+                case SELECT_FIRST_LAST_ITEM:
+                    application.selectLast();
+                    break;
+            }
+            application.arrowKeyUp();
         } else if (state == ButtonState.SHIFT_PRESSED) {
-
+            switch (prefs.getArrowModeUDShifted()) {
+                case ARROW_KEYS:
+                    application.arrowKeyDown();
+                    break;
+                case SELECT_FIRST_LAST_ITEM:
+                    application.selectLast();
+                    break;
+            }
         }
     }
 
     @Override
     public void leftArrowButton(ButtonState state) {
         if (state == ButtonState.PRESSED) {
-            application.arrowKeyLeft();
+            switch (prefs.getArrowModeLR()) {
+                case ARROW_KEYS:
+                    application.arrowKeyLeft();
+                    break;
+                case SELECT_PREV_NEXT_ITEM:
+                    application.selectNext();
+                    break;
+            }
+            application.arrowKeyUp();
         } else if (state == ButtonState.SHIFT_PRESSED) {
-            application.selectPrevious();
+            switch (prefs.getArrowModeLRShifted()) {
+                case ARROW_KEYS:
+                    application.arrowKeyLeft();
+                    break;
+                case SELECT_PREV_NEXT_ITEM:
+                    application.selectNext();
+                    break;
+            }
         }
     }
 
     @Override
     public void rightArrowButton(ButtonState state) {
         if (state == ButtonState.PRESSED) {
-            application.arrowKeyRight();
+            switch (prefs.getArrowModeLR()) {
+                case ARROW_KEYS:
+                    application.arrowKeyRight();
+                    break;
+                case SELECT_PREV_NEXT_ITEM:
+                    application.selectPrevious();
+                    break;
+            }
+            application.arrowKeyUp();
         } else if (state == ButtonState.SHIFT_PRESSED) {
-            application.selectNext();
+            switch (prefs.getArrowModeLRShifted()) {
+                case ARROW_KEYS:
+                    application.arrowKeyRight();
+                    break;
+                case SELECT_PREV_NEXT_ITEM:
+                    application.selectPrevious();
+                    break;
+            }
         }
     }
 }
