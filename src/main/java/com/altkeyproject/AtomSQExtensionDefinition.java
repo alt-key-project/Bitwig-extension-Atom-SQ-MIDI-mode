@@ -15,6 +15,11 @@ public class AtomSQExtensionDefinition extends ControllerExtensionDefinition
    }
 
    @Override
+   public String getErrorReportingEMail() {
+      return "alt.key.project@gmail.com";
+   }
+
+   @Override
    public String getName()
    {
       return "Atom SQ (MIDI mode)";
