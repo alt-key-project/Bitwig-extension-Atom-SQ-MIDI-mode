@@ -1,4 +1,4 @@
-# Bitwig extension for Atom SQ in MIDI mode
+# Bitwig controller extension for Atom SQ in MIDI mode
 
 _by Alt Key Project_
 
