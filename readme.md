@@ -24,12 +24,11 @@ https://www.bitwig.com/support/technical_support/how-do-i-add-a-controller-exten
 
 ## Feel like you want to buy me a beer?
 
-No beer required (I brew my own). But do consider subscribing to my channel on YouTube. https://www.youtube.com/channel/UC4cKvJ4hia7zULxeCc-7OcQ
+No beer required (I brew my own), and the extension is free. But do consider subscribing to my channel on YouTube (https://www.youtube.com/channel/UC4cKvJ4hia7zULxeCc-7OcQ) if you feel like making me happy.
 
 ## Contact
 
 You can reach me (the developer and first user of the extension) at alt.key.project@gmail.com.
-
 
 ## License 
 
