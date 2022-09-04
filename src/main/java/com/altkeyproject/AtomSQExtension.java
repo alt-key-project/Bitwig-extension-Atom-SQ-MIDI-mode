@@ -33,7 +33,7 @@ public class AtomSQExtension extends ControllerExtension {
         prefs = new AtomSQExtPrefs(host, this::requestReInit);
 
         if ((host.platformIsLinux() || host.platformIsMac()) && !notifiedPlatform.getAndSet(true)) {
-            host.showPopupNotification("Auto-detection of MIDI port not yet implemented under Linux and Mac for the Atom SQ extension. Please send me the input/output MIDI port names!");
+            host.showPopupNotification("Auto-detection of MIDI port not yet implemented under Linux and Mac for the Atom SQ extension. Please send the input/output MIDI port names to alt.key.project@gmail.com!");
         }
 
         if (DEBUGMODE) {
