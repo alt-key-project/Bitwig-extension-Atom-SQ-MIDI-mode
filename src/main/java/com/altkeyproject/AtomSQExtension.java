@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 
 
 public class AtomSQExtension extends ControllerExtension {
-    private final boolean DEBUGMODE = true;
+    private static final boolean DEBUGMODE = false;
     private MidiIn midiIn;
     private AtomSqButtonLogic logic;
     private final AtomicReference<AtomSqMidiMapper> midiMapper = new AtomicReference<>();
@@ -29,7 +29,6 @@ public class AtomSQExtension extends ControllerExtension {
     @Override
     public void init() {
         host = getHost();
-        host.println("*****************************");
         midiIn = host.getMidiInPort(0);
         prefs = new AtomSQExtPrefs(host, this::requestReInit);
 
@@ -39,8 +38,8 @@ public class AtomSQExtension extends ControllerExtension {
 
         if (DEBUGMODE) {
             trace = host::println;
+            trace.accept("--------------------------");
         }
-        trace.accept("--------------------------");
         if (DEBUGMODE) {
             logic = new DebugButtonLogicWrapper(new DefaultButtonLogic(host, prefs), host::println);
         } else {

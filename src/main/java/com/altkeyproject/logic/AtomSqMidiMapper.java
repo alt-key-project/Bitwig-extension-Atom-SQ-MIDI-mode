@@ -35,7 +35,7 @@ public class AtomSqMidiMapper {
         this.buttonLogic = buttonLogic;
         this.control = new ControlChangeActions();
         this.tracer = tracer;
-        tracer.accept("Setup MIDI mapper.");
+        tracer.accept("Init MIDI mappings.");
         midiIn.setMidiCallback((ShortMidiMessageReceivedCallback) msg -> onMidi0(msg));
         midiIn.setSysexCallback((String data) -> onSysex0(data));
 

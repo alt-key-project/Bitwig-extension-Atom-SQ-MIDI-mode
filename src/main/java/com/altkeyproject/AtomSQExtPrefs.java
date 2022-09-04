@@ -23,14 +23,9 @@ public class AtomSQExtPrefs {
         this.onChange = onChange;
         preferences = host.getPreferences();
         settableArrowKeyModeLR = makeSettableEnumValue("Arrow buttons", "left/right", ArrowModeLR.values(), ArrowModeLR.SELECT_PREV_NEXT_ITEM);
-        settableArrowKeyModeUD = makeSettableEnumValue("Arrow buttons", "up/down", ArrowModeLR.values(), ArrowModeLR.SELECT_PREV_NEXT_ITEM);
+        settableArrowKeyModeUD = makeSettableEnumValue("Arrow buttons", "up/down", ArrowModeUD.values(), ArrowModeUD.SELECT_FIRST_LAST_ITEM);
         settableArrowKeyModeLR_SH = makeSettableEnumValue("Arrow buttons", "shift+left/right", ArrowModeLRShifted.values(), ArrowModeLRShifted.ARROW_KEYS);
-        settableArrowKeyModeUD_SH = makeSettableEnumValue("Arrow buttons", "shift+up/down", ArrowModeLRShifted.values(), ArrowModeLRShifted.ARROW_KEYS);
-        printState(host, settableArrowKeyModeLR);
-        printState(host, settableArrowKeyModeUD);
-        printState(host, settableArrowKeyModeLR_SH);
-        printState(host, settableArrowKeyModeUD_SH);
-
+        settableArrowKeyModeUD_SH = makeSettableEnumValue("Arrow buttons", "shift+up/down", ArrowModeUDShifted.values(), ArrowModeUDShifted.ARROW_KEYS);
     }
 
     private void requestRestart() {
@@ -71,7 +66,6 @@ public class AtomSQExtPrefs {
                 defaultValue.toString());
         enumValue.markInterested();
         String key = section + " | " + title;
-        valueTracker.put(key, enumValue.get());
         enumValue.addValueObserver(v -> {
             String prev = valueTracker.put(key, v);
             if (prev != null && !prev.equalsIgnoreCase(v) && Arrays.stream(values).anyMatch(e -> e.toString().equalsIgnoreCase(prev))) {

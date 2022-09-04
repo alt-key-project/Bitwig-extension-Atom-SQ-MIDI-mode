@@ -73,6 +73,9 @@ public class DefaultButtonLogic implements AtomSqButtonLogic {
                 case ARROW_KEYS:
                     application.arrowKeyUp();
                     break;
+                case SELECT_FIRST_LAST_ITEM:
+                    application.selectFirst();
+                    break;
 
             }
         } else if (state == ButtonState.SHIFT_PRESSED) {
@@ -83,7 +86,6 @@ public class DefaultButtonLogic implements AtomSqButtonLogic {
                 case SELECT_FIRST_LAST_ITEM:
                     application.selectFirst();
                     break;
-
             }
         }
     }
@@ -99,7 +101,6 @@ public class DefaultButtonLogic implements AtomSqButtonLogic {
                     application.selectLast();
                     break;
             }
-            application.arrowKeyUp();
         } else if (state == ButtonState.SHIFT_PRESSED) {
             switch (prefs.getArrowModeUDShifted()) {
                 case ARROW_KEYS:
@@ -120,17 +121,16 @@ public class DefaultButtonLogic implements AtomSqButtonLogic {
                     application.arrowKeyLeft();
                     break;
                 case SELECT_PREV_NEXT_ITEM:
-                    application.selectNext();
+                    application.selectPrevious();
                     break;
             }
-            application.arrowKeyUp();
         } else if (state == ButtonState.SHIFT_PRESSED) {
             switch (prefs.getArrowModeLRShifted()) {
                 case ARROW_KEYS:
                     application.arrowKeyLeft();
                     break;
                 case SELECT_PREV_NEXT_ITEM:
-                    application.selectNext();
+                    application.selectPrevious();
                     break;
             }
         }
@@ -144,17 +144,16 @@ public class DefaultButtonLogic implements AtomSqButtonLogic {
                     application.arrowKeyRight();
                     break;
                 case SELECT_PREV_NEXT_ITEM:
-                    application.selectPrevious();
+                    application.selectNext();
                     break;
             }
-            application.arrowKeyUp();
         } else if (state == ButtonState.SHIFT_PRESSED) {
             switch (prefs.getArrowModeLRShifted()) {
                 case ARROW_KEYS:
                     application.arrowKeyRight();
                     break;
                 case SELECT_PREV_NEXT_ITEM:
-                    application.selectPrevious();
+                    application.selectNext();
                     break;
             }
         }
