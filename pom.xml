@@ -57,7 +57,7 @@
 						</goals>
 						<configuration>
 							<sourceFile>${project.build.directory}/${project.build.finalName}.jar</sourceFile>
-							<destinationFile>${bitwig.extension.directory}/AtomSQ.bwextension</destinationFile>
+							<destinationFile>${bitwig.extension.directory}/AtomSQ-MIDI.bwextension</destinationFile>
 						</configuration>
 					</execution>
 				</executions>

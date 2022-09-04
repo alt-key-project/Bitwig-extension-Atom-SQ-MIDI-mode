@@ -8,15 +8,11 @@ import com.bitwig.extension.controller.api.*;
 public class DefaultButtonLogic implements AtomSqButtonLogic {
     private final Transport transport;
     private final Application application;
-    private final Mixer mixer;
     private final AtomSQExtPrefs prefs;
-    private final ControllerHost host;
 
     public DefaultButtonLogic(ControllerHost host, AtomSQExtPrefs prefs) {
-        this.host = host;
         transport = host.createTransport();
         application = host.createApplication();
-        mixer = host.createMixer();
         this.prefs = prefs;
         registerInterest();
     }
@@ -40,7 +36,7 @@ public class DefaultButtonLogic implements AtomSqButtonLogic {
         if (state == ButtonState.PRESSED) {
             transport.play();
         } else if (state == ButtonState.SHIFT_PRESSED) {
-            //loop
+            transport.isArrangerLoopEnabled().toggle();
         }
     }
 
@@ -49,7 +45,7 @@ public class DefaultButtonLogic implements AtomSqButtonLogic {
         if (state == ButtonState.PRESSED) {
             transport.record();
         } else if (state == ButtonState.SHIFT_PRESSED) {
-            //save
+            application.getAction("Save").invoke();
         }
     }
 
@@ -58,9 +54,14 @@ public class DefaultButtonLogic implements AtomSqButtonLogic {
         if (state == ButtonState.PRESSED) {
             transport.isMetronomeEnabled().toggle();
         } else if (state == ButtonState.SHIFT_PRESSED) {
-            transport.isMetronomeAudibleDuringPreRoll().toggle();
-            if (transport.preRoll().get().equalsIgnoreCase("none") && transport.isMetronomeAudibleDuringPreRoll().get()) {
-                transport.preRoll().set("one_bar");
+            boolean isActive = transport.isMetronomeAudibleDuringPreRoll().get();
+            if (!isActive) {
+                if (transport.preRoll().get().equalsIgnoreCase("none")) {
+                    transport.preRoll().set("one_bar");
+                }
+                transport.isMetronomeAudibleDuringPreRoll().set(true);
+            } else {
+                transport.isMetronomeAudibleDuringPreRoll().set(false);
             }
         }
     }
