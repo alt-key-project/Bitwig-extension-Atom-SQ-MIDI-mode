@@ -26,6 +26,10 @@ https://www.bitwig.com/support/technical_support/how-do-i-add-a-controller-exten
 
 No beer required (I brew my own), and the extension is free. But do consider subscribing to my channel on YouTube (https://www.youtube.com/channel/UC4cKvJ4hia7zULxeCc-7OcQ) if you feel like making me happy.
 
+## More info
+
+I have a video on youtube where I show the Atom SQ running with the extension. https://www.youtube.com/watch?v=0tkbS1fb4LE
+
 ## Contact
 
 You can reach me (the developer and first user of the extension) at alt.key.project@gmail.com.
