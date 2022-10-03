@@ -10,7 +10,7 @@ useful in Bitwig.
 
 Download the latest version here:
 
-https://drive.google.com/file/d/1p0sQRcr2MUlO8ZlRSJB0QG_GdrSI6Kxu/view?usp=sharing
+https://drive.google.com/drive/folders/1l1lUfoDAi-Htt8YTONvt7sr5HCbLMYOn?usp=sharing
 
 The archive contains a bwextension file. Put that file in your Bitwig extensions directory. For more information, read here: 
 
