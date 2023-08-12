@@ -50,6 +50,7 @@ public class AtomSqMidiMapper {
         patterns.add("9?????");
         patterns.add("D?????");
         patterns.add("E0????");
+        patterns.add("A?????");
         patterns.add("B00???");
         patterns.add("B01???");
         patterns.add("B040??");

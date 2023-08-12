@@ -6,7 +6,7 @@
 	<artifactId>atom-sq-alt</artifactId>
 	<packaging>jar</packaging>
 	<name>Atom SQ</name>
-	<version>1.0.1</version>
+	<version>1.1.0</version>
 
 	<properties>
 		<bitwig.extension.directory>C:/Users/morga/Documents/Bitwig Studio/Extensions</bitwig.extension.directory>
